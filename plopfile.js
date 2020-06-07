@@ -65,14 +65,14 @@ module.exports = (plop) => {
             {
                 type: 'add',
                 path:
-                    'src/modules/{{camelCase name}}/{{camelCase name}}.actions.ts',
-                templateFile: 'plop-templates/module/actions.ts.hbs',
+                    'src/modules/{{camelCase name}}/{{camelCase name}}.redux.ts',
+                templateFile: 'plop-templates/module/redux.ts.hbs',
             },
             {
                 type: 'add',
                 path:
-                    'src/modules/{{camelCase name}}/{{camelCase name}}.state.ts',
-                templateFile: 'plop-templates/module/state.ts.hbs',
+                    'src/modules/{{camelCase name}}/{{camelCase name}}.sideEffects.ts',
+                templateFile: 'plop-templates/module/sideEffects.ts.hbs',
             },
             {
                 type: 'add',
@@ -85,14 +85,14 @@ module.exports = (plop) => {
                 path: 'src/store.ts',
                 pattern: /(\/\/<-- IMPORT MODULE STATE -->)/g,
                 template:
-                    "import { {{ camelCase name }}State } from '@/modules/{{ camelCase name }}/{{ camelCase name }}.state';\n$1",
+                    "import { {{ camelCase name }}Reducer } from '@/modules/{{ camelCase name }}/{{ camelCase name }}.redux';\n$1",
             },
             {
                 type: 'modify',
                 path: 'src/store.ts',
                 pattern: /(\/\/<-- INJECT MODULE STATE -->)/g,
                 template:
-                    '{{ camelCase name }}: {{ camelCase name }}State,\n    $1',
+                    '{{ camelCase name }}: {{ camelCase name }}Reducer,\n    $1',
             },
         ],
     });

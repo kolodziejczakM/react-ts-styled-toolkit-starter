@@ -1,0 +1,11 @@
+import React from 'react'
+import { render } from '@testing-library/react'
+import { {{pascalCase name}} } from './{{camelCase name}}.component';
+
+describe('{{pascalCase name}}', () => {
+    it('renders correctly', () => {
+        const { asFragment } = render(<{{pascalCase name}} />);
+
+        expect(asFragment()).toMatchSnapshot();
+    });
+});

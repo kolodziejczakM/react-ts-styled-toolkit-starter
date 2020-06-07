@@ -13,6 +13,7 @@
     "jsx": "react",
     "allowJs": true,
     "baseUrl": ".",
+    "skipLibCheck": true,
     "paths": {
       "@/*": ["./src/*"]
     }
