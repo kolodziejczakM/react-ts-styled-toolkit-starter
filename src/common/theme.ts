@@ -10,7 +10,10 @@ enum fontSizes {
 }
 enum fontFamilies {}
 
-enum spacing {}
+enum spacing {
+    m = '10px',
+    l = '16px',
+}
 
 enum lineHeights {
     m = '16px',
@@ -19,20 +22,9 @@ enum zIndexes {}
 
 enum shadows {}
 
-export enum breakpoints {}
-
-export const media = {
-    gte: (breakpoint: string) => (styles: string): string => `
-    @media only screen and (min-width: ${breakpoint}) {
-        ${styles}
-    }
-`,
-    lte: (breakpoint: string) => (styles: string): string => `
-    @media only screen and (max-width: ${breakpoint}) {
-        ${styles}
-    }
-`,
-} as const;
+export enum breakpoints {
+    s = '400px',
+}
 
 export const theme = {
     colors,

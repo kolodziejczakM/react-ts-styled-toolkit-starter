@@ -1,17 +1,14 @@
-import { createAsyncThunk, createAction } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
-export const fetchAction = createAction('fetch');
-
-export const fetchEffect = createAsyncThunk(
-    fetchAction.type,
+export const fetchSomething = createAsyncThunk(
+    'counter/fetchSomething',
     async (limit: number, thunkAPI) => {
         try {
             const response: Body = await fetch(
                 `https://jsonplaceholder.typicode.com/photos?_limit=${limit}`
             );
 
-            const { data } = await response.json();
-            return { data };
+            return await response.json();
         } catch (error) {
             return { error };
         }

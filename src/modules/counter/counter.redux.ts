@@ -1,10 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { fetchEffect, fetchAction } from './counter.sideEffects';
+import { createSlice, SerializedError } from '@reduxjs/toolkit';
+import { fetchSomething } from './counter.sideEffects';
 
 interface CounterState {
     counterValue: number;
     fetching: boolean;
-    error: Record<string, unknown> | null;
+    error: SerializedError | null;
     fetchedData: Record<string, unknown> | null;
 }
 
@@ -28,41 +28,24 @@ export const { reducer: counterReducer, actions: counterActions } = createSlice(
             }),
         },
         extraReducers: (builder) => {
-            builder.addCase(fetchAction.type, (state) => {
-                return state;
-            });
-            builder.addCase(fetchEffect.pending, (state) => {
+            builder.addCase(fetchSomething.pending, (state) => {
                 return { ...state, fetching: true };
             });
-            builder.addCase(fetchEffect.fulfilled, (state, action: any) => {
+            builder.addCase(fetchSomething.fulfilled, (state, action) => {
                 return {
                     ...state,
                     fetching: false,
                     error: null,
-                    fetchedData: action.payload.data,
+                    fetchedData: action.payload,
                 };
             });
-            builder.addCase(fetchEffect.rejected, (state, action: any) => {
+            builder.addCase(fetchSomething.rejected, (state, action) => {
                 return {
                     ...state,
                     fetching: false,
-                    error: action.payload.error,
+                    error: action.error,
                 };
             });
-            // [fetchEffect.pending.type]: (state) => ({
-            //     ...state,
-            //     fetching: true,
-            // }),
-            // [fetchEffect.fulfilled.type]: (state) => ({
-            //     ...state,
-            //     fetching: false,
-            //     error: null,
-            // }),
-            // [fetchEffect.rejected.type]: (state, action) => ({
-            //     ...state,
-            //     fetching: false,
-            //     error: action.error,
-            // }),
         },
     }
 );

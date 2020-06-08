@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { fetchSomething{{pascalCase name}} } from './{{camelCase name}}.sideEffects';
 
 interface {{pascalCase name}}State {}
 
@@ -8,6 +9,26 @@ export const { reducer: {{camelCase name}}Reducer, actions: {{camelCase name}}Ac
         initialState: {} as {{pascalCase name}}State,
         reducers: {
             noop{{pascalCase name}}: (state) => state,
+        },
+        extraReducers: (builder) => {
+            builder.addCase(fetchSomething{{pascalCase name}}.pending, (state) => {
+                return { ...state, fetching: true };
+            });
+            builder.addCase(fetchSomething{{pascalCase name}}.fulfilled, (state, action) => {
+                return {
+                    ...state,
+                    fetching: false,
+                    error: null,
+                    fetchedData: action.payload,
+                };
+            });
+            builder.addCase(fetchSomething{{pascalCase name}}.rejected, (state, action) => {
+                return {
+                    ...state,
+                    fetching: false,
+                    error: action.error,
+                };
+            });
         },
     }
 );
